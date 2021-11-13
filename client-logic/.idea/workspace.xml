@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08471604-3392-4eb4-b864-a104e07bff59" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AplicationMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Renderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AplicationMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApplicationMain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +33,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Config" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="AplicationMain" />
+      <option name="MAIN_CLASS_NAME" value="ApplicationMain" />
       <module name="client-logic" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -52,7 +49,7 @@
       <option name="presentableId" value="Default" />
       <updated>1636812998808</updated>
       <workItem from="1636812999996" duration="6000" />
-      <workItem from="1636813126237" duration="265000" />
+      <workItem from="1636813126237" duration="335000" />
     </task>
     <servers />
   </component>
