@@ -1,6 +1,7 @@
 import javax.sound.sampled.Port;
 import java.net.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 
@@ -8,11 +9,11 @@ public class ApplicationMain {
 
     private ServerSocket serverSocket;
     private Socket clientSocket;
-    private int serverIP = 0;
+    private static String serverIP = "127.0.0.1";
 
-    private static final int PORT = 0;
+    private static final int PORT = 7080;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // THIS IS WHERE WE WILL BE SENDING STUFF TO NATHAN INNIT
 
         //user opens game, request sent to display main menu
@@ -34,14 +35,19 @@ public class ApplicationMain {
         Renderer.render();
     }
 
-    public void sendData(String SOMETHINGLOL) throws IOException {
+    public static void sendData(byte[] SOMETHINGLOL) throws IOException {
         //This will send the data to the frontend to process
 
         var socket = new Socket(String.valueOf(serverIP), PORT);
         var in  = new Scanner(socket.getInputStream());
-        var out = new PrintWriter(socket.getOutputStream(), true);
-        out.println(SOMETHINGLOL);
-        System.out.println(in.nextLine());
+        System.out.println("Connected to " + serverIP + " on " + Integer.toString(PORT));
+        //var out = new PrintWriter(socket.getOutputStream(), true);
+        OutputStream outToServer = socket.getOutputStream();
+        DataOutputStream out = new DataOutputStream(outToServer);
+
+        out.write(SOMETHINGLOL);
+        //out.write(Integer.parseInt("LOL"));
+        //System.out.println(in.nextLine());
 
         //System.out.println("Trying to fix it");
     }
@@ -50,7 +56,7 @@ public class ApplicationMain {
     public class MainMenuStuff {
         public void mainMenuRequests(int reqType, String userID) throws IOException {
             String fullReq = Integer.toString(reqType) + ',' + userID;
-            ApplicationMain.this.sendData(fullReq);
+            //ApplicationMain.this.sendData(fullReq);
         }
     }
 }
