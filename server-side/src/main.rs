@@ -1,5 +1,10 @@
+pub mod player;
+
 use std::net::{TcpListener, TcpStream};
-use std::io::{Read, Write};
+
+pub mod prelude {
+    pub use crate::player;
+}
 
 fn main() {
     let listener = TcpListener::bind("127.0.0.1:6969").unwrap();
@@ -11,19 +16,8 @@ fn main() {
     }
 }
 
-fn handle_connection(mut stream: TcpStream) {
-    'conn: loop {
-        let mut buffer = [0; 1024];
-
-        stream.read(&mut buffer).unwrap();
-
-        let response = &buffer;
-
-        stream.write(response).unwrap();
-        stream.flush().unwrap();
-
-        if String::from_utf8_lossy(&buffer).starts_with("quit") {
-            break 'conn;
-        }
-    }
+fn handle_connection(stream: TcpStream) {
+    use crate::player::Player;
+    let mut player = Player::from_connection(stream);
+    player.handle();
 }
