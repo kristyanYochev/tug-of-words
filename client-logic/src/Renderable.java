@@ -1,8 +1,6 @@
-import java.util.UUID;
-
 public abstract class Renderable {
-  private final UUID id;
-  private int xPos, yPos;
+  private final int id;
+  protected int xPos, yPos;
 
   public int getxPos() {
     return xPos;
@@ -20,7 +18,7 @@ public abstract class Renderable {
     Renderer.unregister(this);
   }
 
-  public UUID getId() {
+  public int getId() {
     return id;
   }
 

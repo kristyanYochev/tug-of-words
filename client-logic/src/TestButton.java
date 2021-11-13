@@ -1,6 +1,9 @@
 public class TestButton extends  Renderable {
   public TestButton() {
     super();
+
+    xPos = 69;
+    yPos = 69;
   }
 
   @Override
