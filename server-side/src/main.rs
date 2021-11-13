@@ -1,23 +1,24 @@
 pub mod player;
-
-use std::net::{TcpListener, TcpStream};
+pub mod game;
 
 pub mod prelude {
-    pub use crate::player;
+    pub use crate::player::*;
+    pub use crate::game::*;
 }
 
+use std::net::TcpListener;
+use crate::prelude::*;
+
 fn main() {
+    let game = Game::new();
+    let (game_thread, game_tx) = game.run();
+
     let listener = TcpListener::bind("127.0.0.1:6969").unwrap();
 
     for stream in listener.incoming() {
         let stream = stream.unwrap();
 
-        handle_connection(stream);
+        game_tx.send(GameMessage::PlayerJoin(stream)).unwrap();
     }
-}
-
-fn handle_connection(stream: TcpStream) {
-    use crate::player::Player;
-    let mut player = Player::from_connection(stream);
-    player.handle();
+    game_thread.join().unwrap();
 }
