@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/client-logic/client-logic.iml" filepath="$PROJECT_DIR$/client-logic/client-logic.iml" />
       <module fileurl="file://$PROJECT_DIR$/server-side/server-side.iml" filepath="$PROJECT_DIR$/server-side/server-side.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/tug-of-words.iml" filepath="$PROJECT_DIR$/.idea/tug-of-words.iml" />
     </modules>
