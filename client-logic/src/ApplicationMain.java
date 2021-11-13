@@ -3,15 +3,28 @@ import java.net.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 
 public class ApplicationMain {
 
     private ServerSocket serverSocket;
-    private Socket clientSocket;
+    public Socket clientSocket;
     private static String serverIP = "127.0.0.1";
-
     private static final int PORT = 7080;
+    static Socket socket;
+
+    static {
+        try {
+            socket = new Socket(String.valueOf(serverIP), PORT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public ApplicationMain() throws IOException {
+    }
 
     public static void main(String[] args) throws IOException {
         // THIS IS WHERE WE WILL BE SENDING STUFF TO NATHAN INNIT
@@ -29,34 +42,44 @@ public class ApplicationMain {
         // JoinCode txtbox: optional
 
         //Add the user to the "lobby", display the lobby screeen with the other player's  and a ready button
-<<<<<<< Updated upstream
+        /***
         new TestButton();
         new JoinButton();
         new joinCodeTextBox();
         Renderer.render();
-=======
-        //new TestButton();
-        //Renderer.render();
+        ***/
 
-        createRoom("Some Username");
-        joinRoom("Some Username", "42jd23");
+        createRoom("Some Username", socket);
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        joinRoom("Some Username", "42jd23", socket);
     }
 
-    private static void joinRoom(String some_username, String s) {
->>>>>>> Stashed changes
-    }
-
-    public static void sendData(byte[] SOMETHINGLOL) throws IOException {
+    public static void sendData(String SOMETHINGLOL, Socket socket) throws IOException {
         //This will send the data to the frontend to process
 
-        var socket = new Socket(String.valueOf(serverIP), PORT);
-        var in  = new Scanner(socket.getInputStream());
+
+        var inScanner  = new Scanner(socket.getInputStream());
         System.out.println("Connected to " + serverIP + " on " + Integer.toString(PORT));
         //var out = new PrintWriter(socket.getOutputStream(), true);
-        OutputStream outToServer = socket.getOutputStream();
-        DataOutputStream out = new DataOutputStream(outToServer);
+        //OutputStream outToServer = socket.getOutputStream();
+        //DataOutputStream out = new DataOutputStream(outToServer);
 
+        InputStreamReader input = new InputStreamReader(socket.getInputStream());
+        BufferedReader in = new BufferedReader(input);
+        OutputStreamWriter output = new OutputStreamWriter(socket.getOutputStream());
+        BufferedWriter out = new BufferedWriter(output);
+        System.out.println("Reached");
         out.write(SOMETHINGLOL);
+        out.newLine();
+        out.flush();
+        out.write("ASD");
+        out.newLine();
+        out.flush();
+
         //out.write(Integer.parseInt("LOL"));
         //System.out.println(in.nextLine());
 
@@ -65,13 +88,14 @@ public class ApplicationMain {
 
 
 
-        public static void createRoom(String userID) throws IOException {
+        public static void createRoom(String userID, Socket socket) throws IOException {
             String fullReq = Integer.toString(1) + userID;
-            sendData(fullReq.getBytes(StandardCharsets.UTF_8));
+            sendData(fullReq, socket);
+
         }
-        public void joinRoom(int reqType, String userID, String joinCode) throws IOException {
+        public static void joinRoom(String userID, String joinCode, Socket socket) throws IOException {
             String fullReq = Integer.toString(2) + userID + joinCode; //joinCode is a 6 digit alphanumeric code
-            sendData(fullReq.getBytes(StandardCharsets.UTF_8));
+            sendData(fullReq, socket);
         }
 
 
