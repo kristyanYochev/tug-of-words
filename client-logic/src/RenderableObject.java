@@ -1,3 +1,3 @@
 public enum RenderableObject {
-  Test_Button
+  Test_Button, JoinButton, Textbox;
 }
