@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/server-side/server-side.iml" filepath="$PROJECT_DIR$/server-side/server-side.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/tug-of-words.iml" filepath="$PROJECT_DIR$/.idea/tug-of-words.iml" />
+    </modules>
+  </component>
+</project>
