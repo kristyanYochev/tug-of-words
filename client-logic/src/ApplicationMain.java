@@ -42,12 +42,12 @@ public class ApplicationMain {
         // JoinCode txtbox: optional
 
         //Add the user to the "lobby", display the lobby screeen with the other player's  and a ready button
-        /***
+
         new TestButton();
         new JoinButton();
         new joinCodeTextBox();
         Renderer.render();
-        ***/
+
 
         createRoom("Some Username", socket);
         try {
