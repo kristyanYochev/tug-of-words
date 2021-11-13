@@ -1,0 +1,9 @@
+<changelist name="Uncommitted_changes_before_Update_at_13_11_2021_15_20_[Changes]" date="1636816832197" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2021_15_20_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 13/11/2021 15:20 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="../server-side/Cargo.lock" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+</changelist>
