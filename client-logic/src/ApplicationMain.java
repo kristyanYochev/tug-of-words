@@ -29,10 +29,21 @@ public class ApplicationMain {
         // JoinCode txtbox: optional
 
         //Add the user to the "lobby", display the lobby screeen with the other player's  and a ready button
+<<<<<<< Updated upstream
         new TestButton();
         new JoinButton();
         new joinCodeTextBox();
         Renderer.render();
+=======
+        //new TestButton();
+        //Renderer.render();
+
+        createRoom("Some Username");
+        joinRoom("Some Username", "42jd23");
+    }
+
+    private static void joinRoom(String some_username, String s) {
+>>>>>>> Stashed changes
     }
 
     public static void sendData(byte[] SOMETHINGLOL) throws IOException {
@@ -53,11 +64,16 @@ public class ApplicationMain {
     }
 
 
-    public class MainMenuStuff {
-        public void mainMenuRequests(int reqType, String userID) throws IOException {
-            String fullReq = Integer.toString(reqType) + ',' + userID;
-            //ApplicationMain.this.sendData(fullReq);
+
+        public static void createRoom(String userID) throws IOException {
+            String fullReq = Integer.toString(1) + userID;
+            sendData(fullReq.getBytes(StandardCharsets.UTF_8));
         }
-    }
+        public void joinRoom(int reqType, String userID, String joinCode) throws IOException {
+            String fullReq = Integer.toString(2) + userID + joinCode; //joinCode is a 6 digit alphanumeric code
+            sendData(fullReq.getBytes(StandardCharsets.UTF_8));
+        }
+
+
 }
 
