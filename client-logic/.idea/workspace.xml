@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="08471604-3392-4eb4-b864-a104e07bff59" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AplicationMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Renderer.java" afterDir="false" />
+    <list default="true" id="6b7015b5-6f96-4e59-be31-fbf9d04958dc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ApplicationMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApplicationMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Button.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Renderable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestButton.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,10 +39,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RunManager">
     <configuration name="Config" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="AplicationMain" />
+      <option name="MAIN_CLASS_NAME" value="ApplicationMain" />
       <module name="client-logic" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -69,5 +76,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

@@ -1,16 +1,19 @@
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.InterfaceAddress;
 import java.net.Socket;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 //2048 x 1536
 public class Renderer {
   public static class StreamMaker {
-    UUID id;
+    int id;
     Map<String, String> data;
 
-    public StreamMaker(UUID id) {
+    public StreamMaker(int id) {
       this.id = id;
       data = new HashMap<>();
     }
@@ -21,31 +24,27 @@ public class Renderer {
 
     @Override
     public String toString() {
-      return id + data.toString();
-      //return id + data.keySet().stream().map(x -> String.format("{%s:%s}", x, data.get(x))).collect((x, y) -> x + y);
+      return id + ":" + data.keySet().stream().map(x -> String.format("%s=%s", x, data.get(x))).collect(Collectors.joining(","));
     }
   }
 
   private static final Renderer renderer = new Renderer();
   private Socket socket;
-  private Set<Renderable> renderContext;
+  private final Set<Renderable> renderContext;
 
   private Renderer() {
+//    try {
+//      socket = new Socket(InetAddress.getLocalHost(), 6969);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
 
-    try {
-      socket = new Socket(InetAddress.getLocalHost(), 6969);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    renderer.renderContext = new HashSet<>();
+    renderContext = new HashSet<>();
   }
 
   public static void render() {
-    DataOutputStream out;
-
-    try {
-      out = new DataOutputStream(renderer.socket.getOutputStream());
+//    try {
+//      DataOutputStream out = new DataOutputStream(renderer.socket.getOutputStream());
 
       for (Renderable renderable : renderer.renderContext) {
         StreamMaker streamMaker = new StreamMaker(renderable.getId());
@@ -54,32 +53,46 @@ public class Renderer {
 
         renderable.onRender(streamMaker);
 
-        out.writeUTF(streamMaker.toString());
+        System.out.println(streamMaker);
+
+//        out.writeUTF(streamMaker.toString());
       }
 
-      out.close();
-
-    } catch (IOException e) {
-      e.printStackTrace();
-      int skeleton ;
-    }
+//      out.close();
+//
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
   }
 
-  public static UUID register(Renderable renderable) {
+  public static int register(Renderable renderable) {
     renderer.renderContext.add(renderable);
 
-    UUID ret;
+    int id;
     do {
-      ret = UUID.randomUUID();
-    } while (isUUIDInUse(ret));
+      id = ThreadLocalRandom.current().nextInt();
+    } while (isIdInUse(id));
 
+//    try {
+//      DataOutputStream out = new DataOutputStream(renderer.socket.getOutputStream());
 
+      StreamMaker streamMaker = new StreamMaker(0);
+      streamMaker.addData("type", renderable.getType().toString());
+      streamMaker.addData("id", Integer.toString(id));
 
-    return ret;
+      System.out.println(streamMaker);
+
+//      out.close();
+//
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
+
+    return id;
   }
 
-  private static boolean isUUIDInUse(UUID uuid) {
-    return renderer.renderContext.stream().anyMatch(x -> x.getId() == uuid);
+  private static boolean isIdInUse(int id) {
+    return id == 0 || renderer.renderContext.stream().anyMatch(x -> x.getId() == id);
   }
 
   public static void unregister(Renderable renderable) {

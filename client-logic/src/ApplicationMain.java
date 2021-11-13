@@ -16,6 +16,8 @@ public class ApplicationMain {
         // JoinCode txtbox: optional
 
         //Add the user to the "lobby", display the lobby screeen with the other player's  and a ready button
+        new TestButton();
+        Renderer.render();
     }
 
     public void sendData() {
