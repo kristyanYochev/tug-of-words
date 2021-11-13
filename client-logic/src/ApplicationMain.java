@@ -1,4 +1,16 @@
+import javax.sound.sampled.Port;
+import java.net.*;
+import java.io.*;
+import java.util.*;
+
+
 public class ApplicationMain {
+
+    private ServerSocket serverSocket;
+    private Socket clientSocket;
+    private int serverIP = 0;
+
+    private static final int PORT = 0;
 
     public static void main(String[] args) {
         // THIS IS WHERE WE WILL BE SENDING STUFF TO NATHAN INNIT
@@ -20,10 +32,24 @@ public class ApplicationMain {
         Renderer.render();
     }
 
-    public void sendData() {
+    public void sendData(String SOMETHINGLOL) throws IOException {
         //This will send the data to the frontend to process
-        System.out.println("Trying to fix it");
+
+        var socket = new Socket(String.valueOf(serverIP), PORT);
+        var in  = new Scanner(socket.getInputStream());
+        var out = new PrintWriter(socket.getOutputStream(), true);
+        out.println(SOMETHINGLOL);
+        System.out.println(in.nextLine());
+
+        //System.out.println("Trying to fix it");
     }
 
+
+    public class MainMenuStuff {
+        public void mainMenuRequests(int reqType, String userID) throws IOException {
+            String fullReq = Integer.toString(reqType) + ',' + userID;
+            ApplicationMain.this.sendData(fullReq);
+        }
+    }
 }
 
