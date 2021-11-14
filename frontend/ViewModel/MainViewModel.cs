@@ -4,6 +4,7 @@ using frontend.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -14,21 +15,25 @@ namespace frontend.ViewModel
     class MainViewModel
     {
         private Server server;
-        public ObservableCollection<ContentElement> RenderedElems { get; }
+        //public ObservableCollection<ContentElement> RenderedElems { get; }
         public object Buton { get; private set; }
 
         private Dictionary<int, ContentElementModel> models;
+        private Grid grid;
 
-        public MainViewModel()
+        public MainViewModel(Grid grid)
         {
+            this.grid = grid;
             server = new Server(OnRenderAction);
-            RenderedElems = new ObservableCollection<ContentElement>();
+            //RenderedElems = new ObservableCollection<ContentElement>();
             models = new Dictionary<int, ContentElementModel>();
         }
         
         private void OnRenderAction(string action)
         {
+            Debug.WriteLine(action);
             string[] split = action.Split(':');
+            Debug.WriteLine(action[0]);
             int id = int.Parse(split[0]);
             Dictionary<string, string> param = MakeDict(split[1]);
 
@@ -56,7 +61,8 @@ namespace frontend.ViewModel
         {
             ContentElementModel model = MakeObject(param);
             models.Add(id, model);
-            RenderedElems.Add(model.GetElement());
+            grid.Children.Add(model.GetElement());
+            //RenderedElems.Add(model.GetElement());
         }
 
         private ContentElementModel MakeObject(Dictionary<string, string> param)

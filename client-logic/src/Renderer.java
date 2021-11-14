@@ -63,7 +63,7 @@ public class Renderer {
       frame.append(String.format("%s\n", streamMaker));
     }
 
-    sendRawFrame(frame.toString());
+    sendRawFrame(frame.substring(0, frame.length() - 1));
   }
 
   public static void register(Renderable renderable, Map<String, String> params) {

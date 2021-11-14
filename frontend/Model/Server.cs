@@ -42,6 +42,7 @@ namespace frontend.Model
                 listener.Stop();
             });
 
+            #region
             //sender = new Task(() =>
             //{
             //    Debug.WriteLine("connecting to server");
@@ -74,6 +75,7 @@ namespace frontend.Model
             //    socket.Close();
             //    Debug.WriteLine("Client closed");
             //});
+            #endregion
 
             server.Start();
             //sender.Start();

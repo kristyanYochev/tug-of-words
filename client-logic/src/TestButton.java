@@ -6,8 +6,6 @@ public class TestButton extends  Renderable {
     {{
       put("width", "100");
       put("height", "100");
-      put("xPos", "100");
-      put("yPos", "100");
     }});
   }
 
@@ -18,7 +16,6 @@ public class TestButton extends  Renderable {
 
   @Override
   public void onRender(Renderer.StreamMaker streamMaker) {
-    streamMaker.addData("width", "60");
-    streamMaker.addData("height", "60");
+
   }
 }

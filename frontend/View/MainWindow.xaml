@@ -9,11 +9,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Background="Black">
-    <Window.DataContext>
-        <ViewModel:MainViewModel/>
-    </Window.DataContext>
     <Viewbox Stretch="Uniform">
-        <ItemsControl Width="400" Height="300" Background="White"
-                      ItemsSource="{Binding RenderedElems}"/>
+        <Grid Width="400" Height="300" Background="White"
+              x:Name="grid"/>
+        <!--<ItemsControl Width="400" Height="300" Background="White"
+                      ItemsSource="{Binding RenderedElems}"/>-->
     </Viewbox>
 </Window>

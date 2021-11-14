@@ -18,7 +18,9 @@ public class CreateButton extends Renderable {
   }
 
   @Override
-  public void onRender(Renderer.StreamMaker streamMaker) {}
+  public void onRender(Renderer.StreamMaker streamMaker) {
+
+  }
 
   public void onClick(Textbox userBox) {
     if (userBox.inputValidation()) {
