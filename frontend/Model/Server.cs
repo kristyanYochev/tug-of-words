@@ -99,7 +99,6 @@ namespace frontend.Model
             } while (!received.EndsWith("-"));
 
             stream.Write(new byte[] { 0 }, 0, 1);
-
             return stitchedData[0..^1];
         }
 

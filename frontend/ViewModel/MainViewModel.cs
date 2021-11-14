@@ -69,7 +69,7 @@ namespace frontend.ViewModel
         {
             switch (param["type"])
             {
-                case "Button_owo":
+                case "Test_Button":
                     return new Test_Object();
                 default:
                     break;

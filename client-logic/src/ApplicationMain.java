@@ -32,9 +32,9 @@ public class ApplicationMain {
         TestButton buttonOwO = new TestButton();
         TestButton buttonUwU = new TestButton();
         buttonOwO.yPos = 100;
-        buttonUwU.yPos = 0;
         buttonUwU.xPos = 100;
         Renderer.render();
+
 //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
 //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
 //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
