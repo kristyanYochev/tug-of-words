@@ -1,7 +1,8 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestButton extends  Renderable {
+public class TestButton extends Renderable {
+  private final EventListener listener;
 
   public TestButton() {
     super(new HashMap<>()
@@ -10,8 +11,9 @@ public class TestButton extends  Renderable {
       put("height", "100");
     }});
 
-    EventListener listener = new EventListener(getId());
-    listener.subscribeEvent("Clicked", this::OnClick);
+    listener = new EventListener(getId());
+
+    listener.subscribeEvent("click", this::onClick);
   }
 
   @Override
@@ -24,7 +26,8 @@ public class TestButton extends  Renderable {
 
   }
 
-  private void OnClick(Map<String, String> args) {
-    
+  private void onClick(Map<String, String> args) {
+    xPos += 20;
+    yPos += 20;
   }
 }

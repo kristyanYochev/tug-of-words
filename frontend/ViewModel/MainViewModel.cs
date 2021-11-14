@@ -59,18 +59,17 @@ namespace frontend.ViewModel
 
         private void MakeElement(int id, Dictionary<string, string> param)
         {
-            ContentElementModel model = MakeObject(param);
+            ContentElementModel model = MakeObject(id, param);
             models.Add(id, model);
             grid.Children.Add(model.GetElement());
-            //RenderedElems.Add(model.GetElement());
         }
 
-        private ContentElementModel MakeObject(Dictionary<string, string> param)
+        private ContentElementModel MakeObject(int id, Dictionary<string, string> param)
         {
             switch (param["type"])
             {
                 case "Test_Button":
-                    return new Test_Object();
+                    return new Test_Object(server.BufferEvent, id);
                 default:
                     break;
             }

@@ -36,14 +36,21 @@ namespace frontend.Model
         }
 
         private readonly ContentElement elem;
+        private readonly int id;
 
-        public ContentElementModel()
+        public ContentElementModel(int id)
         {
             elem = new ContentElement
             {
                 DataContext = this,
                 Content = MakeContent()
             };
+            this.id = id;
+        }
+
+        public int GetId()
+        {
+            return id;
         }
 
         public ContentElement GetElement()

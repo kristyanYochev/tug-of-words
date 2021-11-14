@@ -12,7 +12,5 @@
     <Viewbox Stretch="Uniform">
         <Grid Width="400" Height="300" Background="White"
               x:Name="grid"/>
-        <!--<ItemsControl Width="400" Height="300" Background="White"
-                      ItemsSource="{Binding RenderedElems}"/>-->
     </Viewbox>
 </Window>

@@ -19,7 +19,8 @@ public class ApplicationMain {
         try {
             socket = new Socket(String.valueOf(serverIP), PORT);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Could not connect to matching server");
+            //e.printStackTrace();
         }
     }
 
@@ -45,7 +46,11 @@ public class ApplicationMain {
         TestButton buttonUwU = new TestButton();
         buttonOwO.yPos = 100;
         buttonUwU.xPos = 100;
-        Renderer.render();
+
+        while (true) {
+            Renderer.render();
+            Renderer.processEvents();
+        }
 
 //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
 //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
@@ -54,7 +59,7 @@ public class ApplicationMain {
 //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
 //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
 
-        Renderer.close();
+        //Renderer.close();
     }
 
     public static void sendData(byte[] SOMETHINGLOL) throws IOException {

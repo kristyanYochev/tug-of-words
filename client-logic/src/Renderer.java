@@ -58,8 +58,7 @@ public class Renderer {
       streamMaker.addData("yPos", Integer.toString(renderable.getyPos()));
 
       renderable.onRender(streamMaker);
-
-      System.out.println(streamMaker);
+      
       frame.append(String.format("%s\n", streamMaker));
     }
 
@@ -77,8 +76,8 @@ public class Renderer {
       streamMaker.addData(key, params.get(key));
     }
 
-    System.out.println(streamMaker);
     sendRawFrame(streamMaker.toString());
+    processEvents();
   }
 
   public  static int assignId() {
@@ -112,5 +111,68 @@ public class Renderer {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public static void processEvents() {
+    for (Event e : getEvents()) {
+      EventListener.onEvent(e.getId(), e);
+    }
+  }
+
+  private static List<Event> getEvents() {
+    List<Event> ret = new ArrayList<>();
+
+    try {
+      OutputStream os = new DataOutputStream(renderer.socket.getOutputStream());
+      InputStream is = new DataInputStream(renderer.socket.getInputStream());
+
+      while (is.available() == 0) { }
+
+      String stitchedData = "";
+      String received;
+      do
+      {
+        received = ReadStream(is);
+
+        stitchedData += received;
+      } while (!received.endsWith("-"));
+      stitchedData = stitchedData.substring(0, stitchedData.length() - 1);
+
+      if (stitchedData.length() > 0) {
+        for (String event : stitchedData.split("\n")) {
+          String[] parts = event.split(":");
+          Map<String, String> params = new HashMap<>();
+          if (parts.length == 3)
+          {
+            String[] kvs = parts[2].split(",");
+
+            for (String str : kvs) {
+              String[] kv = str.split("=");
+              params.put(kv[0], kv[1]);
+            }
+          }
+
+          ret.add(new Event(Integer.parseInt(parts[0]), parts[1], params));
+        }
+      }
+
+      os.write(new byte[] {0}, 0, 1);
+
+    } catch (IOException ioException) {
+      ioException.printStackTrace();
+    }
+    return ret;
+  }
+
+  private static String ReadStream(InputStream is) {
+    byte[] receivedBytes = new byte[256];
+    int readLength = 0;
+    try {
+      readLength = is.read(receivedBytes, 0, receivedBytes.length);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    String received = new String(receivedBytes).substring(0, readLength);
+    return  received;
   }
 }

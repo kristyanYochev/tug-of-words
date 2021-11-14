@@ -1,6 +1,7 @@
 ﻿using frontend.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -11,17 +12,28 @@ namespace frontend.UIElements
 
     class Test_Object : ContentElementModel
     {
-        public Test_Object() : base()
+        private readonly Action<Tuple<int, string, Dictionary<string, string>>> enqueue;
+        public Test_Object(Action<Tuple<int, string, Dictionary<string, string>>> enqueue, int id) : base(id)
         {
-
+            this.enqueue = enqueue;
         }
 
         public override object MakeContent()
         {
-            return new Rectangle()
+            Rectangle rect = new Rectangle()
             {
-                Fill = Brushes.Red
+                Fill = Brushes.Red,
             };
+            rect.MouseDown += Rect_MouseDown;
+
+            return rect;
+        }
+
+        private void Rect_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs arg)
+        {
+            Debug.WriteLine(GetId());
+            Tuple<int, string, Dictionary<string, string>> e = new Tuple<int, string, Dictionary<string, string>>(GetId(), "click", new Dictionary<string, string>());
+            enqueue.Invoke(e);
         }
 
         public override void ClientUpdate(Dictionary<string, string> param)

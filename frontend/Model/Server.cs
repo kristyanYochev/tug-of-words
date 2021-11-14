@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -13,10 +15,12 @@ namespace frontend.Model
     {
         private readonly Task server;
         //private readonly Task sender;
-        private Action<string> onFramePart;
+        private readonly Action<string> onFramePart;
+        private readonly Queue<Tuple<int, string, Dictionary<string, string>>> eventBuffer;
 
         public Server(Action<string> onFramePart)
         {
+            eventBuffer = new Queue<Tuple<int, string, Dictionary<string, string>>>();
             this.onFramePart = onFramePart;
 
             server = new Task(() =>
@@ -36,6 +40,8 @@ namespace frontend.Model
                     {
                         Application.Current.Dispatcher.Invoke(() => onFramePart(part));
                     }
+
+                    SendEvents(stream, eventBuffer);
                 }
 
                 Debug.WriteLine("client dissconected");
@@ -81,12 +87,37 @@ namespace frontend.Model
             //sender.Start();
         }
 
+        public void BufferEvent(Tuple<int, string, Dictionary<string, string>> e)
+        {
+            eventBuffer.Enqueue(e);
+        }
+
+        private void SendEvents(NetworkStream stream, Queue<Tuple<int, string, Dictionary<string, string>>> queue)
+        {
+            string strData = "";
+            while (eventBuffer.Count > 0)
+            {
+                string parsedE = PasrseEvent(eventBuffer.Dequeue());
+                strData += parsedE;
+            }
+            strData += "-";
+            byte[] data = Encoding.ASCII.GetBytes(strData);
+            stream.Write(data, 0, data.Length);
+
+            byte[] _ = new byte[1];
+            stream.Read(_, 0, 1);
+        }
+
+        private static string PasrseEvent(Tuple<int, string, Dictionary<string, string>> e)
+        {
+            return $"{e.Item1}:{e.Item2}:{string.Join(",", e.Item3.Keys.Select(x => $"{x}={e.Item3[x]}"))}\n";
+        }
+
         private string ReadRawFrame(NetworkStream stream)
         {
             string stitchedData = "";
             string received;
 
-            Debug.WriteLine("readFrame");
             do
             {
                 received = ReadStream(stream);
