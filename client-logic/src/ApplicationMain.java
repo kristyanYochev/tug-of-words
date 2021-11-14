@@ -30,7 +30,8 @@ public class ApplicationMain {
 
         //Add the user to the "lobby", display the lobby screeen with the other player's  and a ready button
         new TestButton();
-        Renderer.render();
+
+        Renderer.close();
     }
 
     public static void sendData(byte[] SOMETHINGLOL) throws IOException {
