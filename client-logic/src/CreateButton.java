@@ -1,14 +1,16 @@
+import java.util.HashMap;
+
 public class CreateButton extends Renderable {
 
   public CreateButton() {
-    super();
+    super(new HashMap<>());
     xPos = 1120;
     yPos = 980;
   }
 
   @Override
-  public RenderableObject getType() {
-    return RenderableObject.JoinButton;
+  public String getType() {
+    return "Join_Button";
   }
 
   @Override

@@ -8,7 +8,7 @@ public abstract class Textbox extends Renderable {
   }
 
   @Override
-  public RenderableObject getType() {
+  public String getType() {
     return "text_box";
   }
 
