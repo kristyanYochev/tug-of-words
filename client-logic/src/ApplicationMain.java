@@ -8,83 +8,131 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationMain {
 
-    private ServerSocket serverSocket;
-    public Socket clientSocket;
-    private static String serverIP = "127.0.0.1";
-    private static final int PORT = 7080;
-    static Socket socket;
+  private ServerSocket serverSocket;
+  public Socket clientSocket;
+  private static String serverIP = "127.0.0.1";
+  private static final int PORT = 7080;
+  static Socket socket;
 
-    static {
-        try {
-            socket = new Socket(String.valueOf(serverIP), PORT);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+  static {
+    try {
+      socket = new Socket(String.valueOf(serverIP), PORT);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
 
-    public ApplicationMain() throws IOException {
+  public ApplicationMain() throws IOException {
+  }
+
+  public static void main(String[] args) throws IOException {
+    // THIS IS WHERE WE WILL BE SENDING STUFF TO NATHAN INNIT
+
+    //user opens game, request sent to display main menu
+
+    //User has option to join room or create room, send request to backend
+    //join room button
+    // request to backend consists of [Username: lorem, JoinCode: ipsum]
+    // Straight to lobby as long as lobby not full or in process.
+    //create room button
+    // Send reqeust to backend to create a room: consists of [Username: lorem, CreateRoomRequest]
+    // Create room: takes user to lobby screen, there will be a join code visible as well
+    // Username txtbox: compulsory
+    // JoinCode txtbox: optional
+
+    //Add the user to the "lobby", display the lobby screeen with the other player's  and a ready button
+
+    /***
+     TestButton buttonOwO = new TestButton();
+     TestButton buttonUwU = new TestButton();
+     buttonOwO.yPos = 100;
+     buttonUwU.yPos = 0;
+     buttonUwU.xPos = 100;
+     Renderer.render();
+     //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
+     //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
+     //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
+     //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
+     //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
+     //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
+
+     Renderer.close();
+     ***/
+  }
+
+  public static void sendData(byte[] SOMETHINGLOL) throws IOException {
+
+    new TestButton();
+    new JoinButton();
+    new joinCodeTextBox();
+    Renderer.render();
+
+
+    createRoom("Some Username", socket);
+    try {
+      TimeUnit.SECONDS.sleep(3);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
     }
+    joinRoom("Some Username", "42jd23", socket);
+  }
 
-    public static void main(String[] args) throws IOException {
-        // THIS IS WHERE WE WILL BE SENDING STUFF TO NATHAN INNIT
-
-        //user opens game, request sent to display main menu
-
-        //User has option to join room or create room, send request to backend
-        //join room button
-        // request to backend consists of [Username: lorem, JoinCode: ipsum]
-        // Straight to lobby as long as lobby not full or in process.
-        //create room button
-        // Send reqeust to backend to create a room: consists of [Username: lorem, CreateRoomRequest]
-        // Create room: takes user to lobby screen, there will be a join code visible as well
-        // Username txtbox: compulsory
-        // JoinCode txtbox: optional
-
-        //Add the user to the "lobby", display the lobby screeen with the other player's  and a ready button
-
-        new TestButton();
-        new JoinButton();
-        new joinCodeTextBox();
-        Renderer.render();
+  public static void sendData(String SOMETHINGLOL, Socket socket) throws IOException {
+    //This will send the data to the frontend to process
 
 
-        createRoom("Some Username", socket);
-        try {
-            TimeUnit.SECONDS.sleep(3);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        joinRoom("Some Username", "42jd23", socket);
-    }
+    var inScanner = new Scanner(socket.getInputStream());
+    System.out.println("Connected to " + serverIP + " on " + Integer.toString(PORT));
+    //var out = new PrintWriter(socket.getOutputStream(), true);
+    //OutputStream outToServer = socket.getOutputStream();
+    //DataOutputStream out = new DataOutputStream(outToServer);
 
-    public static void sendData(String SOMETHINGLOL, Socket socket) throws IOException {
-        //This will send the data to the frontend to process
+    InputStreamReader input = new InputStreamReader(socket.getInputStream());
+    BufferedReader in = new BufferedReader(input);
+    OutputStreamWriter output = new OutputStreamWriter(socket.getOutputStream());
+    BufferedWriter out = new BufferedWriter(output);
+    System.out.println("Reached");
+    out.write(SOMETHINGLOL);
+    out.newLine();
+    out.flush();
+    out.write("ASD");
+    out.newLine();
+    out.flush();
+
+    //out.write(Integer.parseInt("LOL"));
+    //System.out.println(in.nextLine());
+
+    //System.out.println("Trying to fix it");
+  }
+}
 
 
-        var inScanner  = new Scanner(socket.getInputStream());
-        System.out.println("Connected to " + serverIP + " on " + Integer.toString(PORT));
-        //var out = new PrintWriter(socket.getOutputStream(), true);
-        //OutputStream outToServer = socket.getOutputStream();
-        //DataOutputStream out = new DataOutputStream(outToServer);
+
+    
+
+
+
+
+
+
+
+
+    /***
+    public static void sendDataAsByteArray(byte[] data, Socket socket) throws IOException {
+        //This will send data through a socket as a bytearray
+        //Primarily communicating with backend
 
         InputStreamReader input = new InputStreamReader(socket.getInputStream());
-        BufferedReader in = new BufferedReader(input);
-        OutputStreamWriter output = new OutputStreamWriter(socket.getOutputStream());
-        BufferedWriter out = new BufferedWriter(output);
-        System.out.println("Reached");
-        out.write(SOMETHINGLOL);
-        out.newLine();
-        out.flush();
-        out.write("ASD");
-        out.newLine();
-        out.flush();
+        //BufferedReader in = new BufferedReader(input);
 
-        //out.write(Integer.parseInt("LOL"));
-        //System.out.println(in.nextLine());
-
-        //System.out.println("Trying to fix it");
+    public class MainMenuStuff {
+        public void mainMenuRequests(int reqType, String userID) throws IOException {
+            String fullReq = Integer.toString(reqType) + ',' + userID;
+            //ApplicationMain.this.sendData(fullReq);
+        }
     }
+>>>>>>> Stashed changes
 
 
 
