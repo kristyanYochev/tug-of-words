@@ -1,8 +1,8 @@
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -33,60 +33,60 @@ public class Renderer {
   private final Set<Renderable> renderContext;
 
   private Renderer() {
-//    try {
-//      socket = new Socket(InetAddress.getLocalHost(), 6969);
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
+    try {
+      socket = new Socket("localhost", 6969);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     renderContext = new HashSet<>();
   }
 
-  public static void render() {
-//    try {
-//      DataOutputStream out = new DataOutputStream(renderer.socket.getOutputStream());
-
-      for (Renderable renderable : renderer.renderContext) {
-        StreamMaker streamMaker = new StreamMaker(renderable.getId());
-        streamMaker.addData("xPos", Integer.toString(renderable.getxPos()));
-        streamMaker.addData("yPos", Integer.toString(renderable.getyPos()));
-
-        renderable.onRender(streamMaker);
-
-        System.out.println(streamMaker);
-
-//        out.writeUTF(streamMaker.toString());
-      }
-
-//      out.close();
-//
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
+  public static void close() {
+    try {
+      renderer.socket.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
-  public static int register(Renderable renderable) {
+  public static void render() {
+    StringBuilder frame = new StringBuilder();
+    for (Renderable renderable : renderer.renderContext) {
+      StreamMaker streamMaker = new StreamMaker(renderable.getId());
+      streamMaker.addData("xPos", Integer.toString(renderable.getxPos()));
+      streamMaker.addData("yPos", Integer.toString(renderable.getyPos()));
+
+      renderable.onRender(streamMaker);
+
+      System.out.println(streamMaker);
+      frame.append(String.format("%s\n", streamMaker));
+    }
+
+    sendRawFrame(frame.toString());
+  }
+
+  public static void register(Renderable renderable, Map<String, String> params) {
     renderer.renderContext.add(renderable);
+
+    StreamMaker streamMaker = new StreamMaker(0);
+    streamMaker.addData("type", renderable.getType());
+    streamMaker.addData("id", Integer.toString(renderable.getId()));
+
+    for (String key : params.keySet()) {
+      streamMaker.addData(key, params.get(key));
+    }
+
+    System.out.println(streamMaker);
+    sendRawFrame(streamMaker.toString());
+  }
+
+  public  static int assignId() {
 
     int id;
     do {
       id = ThreadLocalRandom.current().nextInt();
     } while (isIdInUse(id));
-
-//    try {
-//      DataOutputStream out = new DataOutputStream(renderer.socket.getOutputStream());
-
-      StreamMaker streamMaker = new StreamMaker(0);
-      streamMaker.addData("type", renderable.getType().toString());
-      streamMaker.addData("id", Integer.toString(id));
-
-      System.out.println(streamMaker);
-
-//      out.close();
-//
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
 
     return id;
   }
@@ -97,5 +97,20 @@ public class Renderer {
 
   public static void unregister(Renderable renderable) {
     renderer.renderContext.remove(renderable);
+  }
+
+  public static void sendRawFrame(String str) {
+    str += "-";
+    try {
+
+      OutputStream os = new DataOutputStream(renderer.socket.getOutputStream());
+      os.write(str.getBytes(), 0, str.length());
+
+      InputStream is = new DataInputStream(renderer.socket.getInputStream());
+      is.readNBytes(1);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

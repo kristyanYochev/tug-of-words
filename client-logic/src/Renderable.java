@@ -1,3 +1,5 @@
+import java.util.Map;
+
 public abstract class Renderable {
   private final int id;
   protected int xPos, yPos;
@@ -10,8 +12,9 @@ public abstract class Renderable {
     return yPos;
   }
 
-  public Renderable() {
-    id = Renderer.register(this);
+  public Renderable(Map<String, String> params) {
+    id = Renderer.assignId();
+    Renderer.register(this, params);
   }
 
   public void close() {
@@ -22,6 +25,6 @@ public abstract class Renderable {
     return id;
   }
 
-  public abstract RenderableObject getType();
+  public abstract String getType();
   public abstract void onRender(Renderer.StreamMaker streamMaker);
 }
