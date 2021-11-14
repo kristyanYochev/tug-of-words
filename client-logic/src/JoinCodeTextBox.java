@@ -1,7 +1,14 @@
+import java.util.HashMap;
+
 public class JoinCodeTextBox extends Textbox {
   public JoinCodeTextBox() {
-    super();
-    this.input = "A3Gb";
+    super(new HashMap<>()
+    {{
+      put("width", "181");
+      put("height", "34");
+      put("xPos", "110");
+      put("yPos", "137");
+    }});
   }
 
   public boolean inputValidation() {

@@ -1,6 +1,14 @@
+import java.util.HashMap;
+
 public class UserTextBox extends Textbox {
   public UserTextBox() {
-    super();
+    super(new HashMap<>()
+    {{
+      put("width", "181");
+      put("height", "34");
+      put("xPos", "110");
+      put("yPos", "81");
+    }});
     this.input = "TestFella";
   }
 

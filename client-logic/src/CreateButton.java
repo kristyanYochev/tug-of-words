@@ -3,9 +3,13 @@ import java.util.HashMap;
 public class CreateButton extends Renderable {
 
   public CreateButton() {
-    super(new HashMap<>());
-    xPos = 1120;
-    yPos = 980;
+    super(new HashMap<>()
+    {{
+      put("width", "91");
+      put("height", "38");
+      put("xPos", "155");
+      put("yPos", "237");
+    }});
   }
 
   @Override

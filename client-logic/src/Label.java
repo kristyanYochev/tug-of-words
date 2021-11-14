@@ -1,18 +1,24 @@
+import java.util.HashMap;
 
+public class Label extends Renderable {
+  public Label() {
+    super(
+        new HashMap<>() {
+          {
+            put("xPos", "110");
+            put("yPos", "81");
+          }
+        });
+  }
 
-public class Label extends Renderable{
-    private String labelText;
-    private int xPos;
-    private int yPos;
+  @Override
+  public void onRender(Renderer.StreamMaker streamMaker) {
+    // apparently this will dynamically scale but who tf knows
 
-    @Override
-    public void onRender(Renderer.StreamMaker streamMaker) {
-        //apparently this will dynamically scale but who tf knows
+  }
 
-    }
-
-    @Override
-    public RenderableObject getType() {
-        return RenderableObject.Label;
-    }
+  @Override
+  public String getType() {
+    return "Label";
+  }
 }
