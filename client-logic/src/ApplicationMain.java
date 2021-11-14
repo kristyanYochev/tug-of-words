@@ -8,11 +8,6 @@ import java.util.*;
 public class ApplicationMain {
 
     private ServerSocket serverSocket;
-<<<<<<< Updated upstream
-    private Socket clientSocket;
-    private static String serverIP = "127.0.0.1";
-=======
-    public Socket clientSocket;
     private static final String serverIP = "127.0.0.1";
     private static final int PORT = 7080;
 
@@ -28,9 +23,7 @@ public class ApplicationMain {
         }
     }
 
->>>>>>> Stashed changes
 
-    private static final int PORT = 7080;
 
     public static void main(String[] args) throws IOException {
         // THIS IS WHERE WE WILL BE SENDING STUFF TO NATHAN INNIT
@@ -54,7 +47,6 @@ public class ApplicationMain {
         buttonUwU.yPos = 0;
         buttonUwU.xPos = 100;
         Renderer.render();
-<<<<<<< Updated upstream
 //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
 //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
 //        Renderer.sendRawFrame("suck my pp\nsuck my pp-");
@@ -66,7 +58,7 @@ public class ApplicationMain {
     }
 
     public static void sendData(byte[] SOMETHINGLOL) throws IOException {
-=======
+
 
         /***
         String msg1 = MainMenu.createRoom("Some Username", socket);
@@ -79,17 +71,11 @@ public class ApplicationMain {
     }
 
     public static String sendData(String SOMETHINGLOL, Socket socket) throws IOException {
->>>>>>> Stashed changes
         //This will send the data to the frontend to process
 
-        var socket = new Socket(String.valueOf(serverIP), PORT);
-        var in  = new Scanner(socket.getInputStream());
         System.out.println("Connected to " + serverIP + " on " + Integer.toString(PORT));
         //var out = new PrintWriter(socket.getOutputStream(), true);
-<<<<<<< Updated upstream
         OutputStream outToServer = socket.getOutputStream();
-        DataOutputStream out = new DataOutputStream(outToServer);
-=======
         //OutputStream outToServer = socket.getOutputStream();
         //DataOutputStream out = new DataOutputStream(outToServer);
 
@@ -105,9 +91,6 @@ public class ApplicationMain {
 
         return replyMessage;
 
->>>>>>> Stashed changes
-
-        out.write(SOMETHINGLOL);
         //out.write(Integer.parseInt("LOL"));
         //System.out.println(in.nextLine());
 
@@ -121,14 +104,13 @@ public class ApplicationMain {
         InputStreamReader input = new InputStreamReader(socket.getInputStream());
         //BufferedReader in = new BufferedReader(input);
 
-<<<<<<< Updated upstream
     public class MainMenuStuff {
         public void mainMenuRequests(int reqType, String userID) throws IOException {
             String fullReq = Integer.toString(reqType) + ',' + userID;
             //ApplicationMain.this.sendData(fullReq);
         }
     }
-=======
+
         //byte[] msg = new byte[512];
 
 
@@ -157,6 +139,5 @@ public class ApplicationMain {
 
     ***/
 
->>>>>>> Stashed changes
 }
 
