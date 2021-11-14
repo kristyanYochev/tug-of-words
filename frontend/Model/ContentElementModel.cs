@@ -2,32 +2,35 @@
 using frontend.View;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using WPFChatApp.Core;
 
 namespace frontend.Model
 {
     public abstract class ContentElementModel : ObeservableObject
     {
-        private int _xPos;
+        private double _xPos;
 
-        public int XPos
+        public double XPos
         {
             get => _xPos;
             set
             {
                 _xPos = value;
+                Debug.WriteLine($"x = {value}");
                 OnPropertyChanged();
             }
         }
 
-        private int _yPos;
+        private double _yPos;
 
-        public int YPos
+        public double YPos
         {
             get => _yPos;
             set
             {
                 _yPos = value;
+                Debug.WriteLine($"y = {value}");
                 OnPropertyChanged();
             }
         }

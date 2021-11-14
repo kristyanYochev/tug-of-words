@@ -18,7 +18,7 @@ namespace frontend.UIElements
 
         public override object MakeContent()
         {
-            return new Ellipse()
+            return new Rectangle()
             {
                 Fill = Brushes.Red
             };
@@ -27,7 +27,7 @@ namespace frontend.UIElements
         public override void ClientUpdate(Dictionary<string, string> param)
         {
             string value;
-            Ellipse content = (Ellipse)GetContent();
+            Rectangle content = (Rectangle)GetContent();
             if (param.TryGetValue("width", out value))
             {
                 content.Width = int.Parse(value);
