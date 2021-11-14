@@ -17,7 +17,7 @@ public abstract class Textbox extends Renderable {
 
   }
 
-  public abstract Boolean
+  public abstract boolean
       inputValidation(); // each text box would have a separate implication of the validation
   // needed
 

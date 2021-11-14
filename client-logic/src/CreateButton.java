@@ -1,6 +1,6 @@
-public class JoinButton extends Renderable {
+public class CreateButton extends Renderable {
 
-  public JoinButton() {
+  public CreateButton() {
     super();
     xPos = 1120;
     yPos = 980;
@@ -14,12 +14,11 @@ public class JoinButton extends Renderable {
   @Override
   public void onRender(Renderer.StreamMaker streamMaker) {}
 
-  public void onClick(Textbox userBox, Textbox codeBox) {
-    if (codeBox.inputValidation() && userBox.inputValidation()) {
-      // send data to backend in the form of a username and join code with a request code
+  public void onClick(Textbox userBox) {
+    if (userBox.inputValidation()) {
+      // send data to backend in the form of a username with a request code
       System.out.println("We are 9 hours in and a singular button works");
-
-      //MainMenuStuff mm = new MainMenuStuff(); // saf has commitiment issues
+      // MainMenuStuff mm = new MainMenuStuff(); // saf has commitment issues
 
     } else {
       System.out.println("YOUR INPUT IS WRONG");
