@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b7015b5-6f96-4e59-be31-fbf9d04958dc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2021_15_20__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2021_15_20__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApplicationMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApplicationMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Renderable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RenderableObject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Textbox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Textbox.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +57,7 @@
       <updated>1636812998808</updated>
       <workItem from="1636812999996" duration="6000" />
       <workItem from="1636813126237" duration="265000" />
-      <workItem from="1636845679416" duration="8756000" />
+      <workItem from="1636845679416" duration="8913000" />
     </task>
     <servers />
   </component>
